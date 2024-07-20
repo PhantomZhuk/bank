@@ -1,1 +1,52 @@
-/*# sourceMappingURL=style.css.map */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat";
+}
+
+.wrap {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wrap .startPage {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #344e41;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+.wrap .startPage h2 {
+  font-size: 56px;
+  margin-bottom: 50px;
+}
+.wrap .startPage .btnContainer {
+  width: 570px;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.wrap .startPage .btnContainer .signBtn {
+  padding: 16px 52px;
+  cursor: pointer;
+  background-color: #588157;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 20px;
+  margin: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wrap .startPage .btnContainer .signBtn:hover {
+  border: 3px solid #588157;
+  background-color: #344e41;
+}/*# sourceMappingURL=style.css.map */
