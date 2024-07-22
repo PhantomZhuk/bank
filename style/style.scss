@@ -33,7 +33,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            
+
             .signBtn {
                 padding: 16px 52px;
                 cursor: pointer;
@@ -51,6 +51,304 @@
             .signBtn:hover {
                 border: 3px solid #588157;
                 background-color: #344e41;
+            }
+        }
+    }
+
+    .signUpPage {
+        width: 100%;
+        min-height: 100vh;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+
+        .signUpForm {
+            width: 800px;
+            height: 500px;
+            box-shadow: 0 1px 7px 0 #333;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 100px;
+            padding: 0 50px 20px 50px; 
+
+            .formCardContainer {
+                width: 100%;
+                height: 150px;
+                display: flex;
+                justify-content: center;
+
+                .formCard {
+                    width: 420px;
+                    height: 230px;
+                    margin-top: -100px;
+                    position: absolute;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    .front {
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding: 20px;
+                        color: #fff;
+                        transform: perspective(600px) rotateY(0deg);
+                        position: absolute;
+                        transition: transform .6s linear;
+                        overflow: hidden;
+                        backface-visibility: hidden;
+                        background: linear-gradient(to right, #3a5a40, #588157);
+                        border-radius: 10px;
+
+                        .formCardHeader {
+                            width: 100%;
+                            height: 40px;
+                            font-size: 20px;
+                        }
+
+                        .PANConatiner {
+                            width: 100%;
+                            height: 50px;
+                            font-size: 32px;
+                        }
+
+                        .flexBox {
+                            width: 100%;
+                            height: 100px;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            font-size: 20px;
+                        }
+                    }
+
+                    .back {
+                        width: 100%;
+                        height: 100%;
+                        transform: perspective(600px) rotateY(180deg);
+                        position: absolute;
+                        transition: transform .6s linear;
+                        overflow: hidden;
+                        backface-visibility: hidden;
+                        background: linear-gradient(to right, #3a5a40, #588157);
+                        border-radius: 10px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        .backTopConatiner {
+                            width: 100%;
+                            height: 50%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+
+                            .line {
+                                width: 100%;
+                                height: 35px;
+                                background-color: #000;
+                            }
+                        }
+
+                        .backBottomConatainer {
+                            width: 100%;
+                            height: 50%;
+                            display: flex;
+                            justify-content: flex-end;
+                            align-items: flex-end;
+                            padding: 20px;
+
+                            .backCVVBox {
+                                width: 100px;
+                                height: 50px;
+                                background-color: #000;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                color: #fff;
+                                font-size: 20px;
+                                padding: 5px;
+
+                                p {
+                                    font-size: 16px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .cardNumberConatiner {
+                width: 100%;
+                height: 100px;
+
+                p {
+                    font-size: 16px;
+                    margin-bottom: 10px;
+                    font-weight: 700;
+                    color: #999;
+                }
+
+                input {
+                    width: 100%;
+                    height: 40px;
+                    border-radius: 5px;
+                    padding-left: 10px;
+                    border: 2px solid #3b5c41;
+                    outline: none;
+                    font-size: 17px;
+                }
+            }
+
+            .formLoginContainer {
+                width: 100%;
+                height: 100px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .formLogin {
+                    width: 49%;
+                    height: 100%;
+
+                    p {
+                        font-size: 16px;
+                        margin-bottom: 10px;
+                        font-weight: 700;
+                        color: #999;
+                    }
+
+                    input {
+                        width: 100%;
+                        height: 40px;
+                        padding-left: 10px;
+                        border-radius: 5px;
+                        border: 2px solid #3b5c41;
+                        font-size: 17px;
+                    }
+                }
+
+                .formPassword {
+                    width: 49%;
+                    height: 100%;
+
+                    p {
+                        font-size: 16px;
+                        margin-bottom: 10px;
+                        font-weight: 700;
+                        color: #999;
+                    }
+
+                    input {
+                        width: 100%;
+                        height: 40px;
+                        padding-left: 10px;
+                        border-radius: 5px;
+                        border: 2px solid #3b5c41;
+                        font-size: 16px;
+                    }
+                }
+            }
+
+            .formDateContainer {
+                width: 100%;
+                height: 100px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .formMonth {
+                    width: 32%;
+                    height: 100%;
+
+                    p {
+                        font-size: 16px;
+                        margin-bottom: 10px;
+                        font-weight: 700;
+                        color: #999;
+                    }
+
+                    select {
+                        width: 100%;
+                        height: 40px;
+                        border-radius: 5px;
+                        padding-left: 10px;
+                        border: 2px solid #3b5c41;
+                        outline: none;
+                        font-size: 17px;
+                    }
+                }
+
+                .formYear {
+                    width: 32%;
+                    height: 100%;
+
+                    p {
+                        font-size: 16px;
+                        margin-bottom: 10px;
+                        font-weight: 700;
+                        color: #999;
+                    }
+
+                    select {
+                        width: 100%;
+                        height: 40px;
+                        border-radius: 5px;
+                        padding-left: 10px;
+                        border: 2px solid #3b5c41;
+                        outline: none;
+                        font-size: 17px;
+                    }
+                }
+
+                .formCVV {
+                    width: 32%;
+                    height: 100%;
+
+                    p {
+                        font-size: 16px;
+                        margin-bottom: 10px;
+                        font-weight: 700;
+                        color: #999;
+                    }
+    
+                    input {
+                        width: 100%;
+                        height: 40px;
+                        border-radius: 5px;
+                        padding-left: 10px;
+                        border: 2px solid #3b5c41;
+                        outline: none;
+                        font-size: 17px;
+                    }
+                }
+            }
+
+            .btnConatiner {
+                width: 100%;
+                height: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                button {
+                    width: 100%;
+                    height: 50px;
+                    border-radius: 10px;
+                    border: none;
+                    background: linear-gradient(to right, #3a5a40, #588157);
+                    color: #fff;
+                    font-size: 18px;
+                    cursor: pointer;
+                }
             }
         }
     }
