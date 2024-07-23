@@ -16,7 +16,7 @@
   width: 100%;
   min-height: 100vh;
   background-color: #344e41;
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -303,6 +303,139 @@
   align-items: center;
 }
 .wrap .signUpPage .signUpForm .btnConatiner button {
+  width: 100%;
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(to right, #3a5a40, #588157);
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+}
+.wrap .signInPage {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+}
+.wrap .signInPage .signInForm {
+  width: 700px;
+  height: 450px;
+  box-shadow: 0 1px 7px 0 #333;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 100px;
+  padding: 0 50px 20px 50px;
+}
+.wrap .signInPage .signInForm .formCardConteiner {
+  width: 100%;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+}
+.wrap .signInPage .signInForm .formCardConteiner .formCard {
+  width: 420px;
+  height: 230px;
+  margin-top: -100px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wrap .signInPage .signInForm .formCardConteiner .formCard .front {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  color: #fff;
+  transform: perspective(600px) rotateY(0deg);
+  position: absolute;
+  transition: transform 0.6s linear;
+  overflow: hidden;
+  backface-visibility: hidden;
+  background: linear-gradient(to right, #3a5a40, #588157);
+  border-radius: 10px;
+}
+.wrap .signInPage .signInForm .formCardConteiner .formCard .front .formCardHeader {
+  width: 100%;
+  height: 40px;
+  font-size: 20px;
+}
+.wrap .signInPage .signInForm .formCardConteiner .formCard .front .PANConatiner {
+  width: 100%;
+  height: 50px;
+  font-size: 32px;
+}
+.wrap .signInPage .signInForm .formCardConteiner .formCard .front .flexBox {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+}
+.wrap .signInPage .signInForm .formLoginContainer {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.wrap .signInPage .signInForm .formLoginContainer .formLogin {
+  width: 100%;
+  height: 100px;
+}
+.wrap .signInPage .signInForm .formLoginContainer .formLogin p {
+  font-size: 16px;
+  margin-bottom: 10px;
+  font-weight: 700;
+  color: #999;
+}
+.wrap .signInPage .signInForm .formLoginContainer .formLogin input {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  padding-left: 10px;
+  border: 2px solid #3b5c41;
+  outline: none;
+  font-size: 17px;
+}
+.wrap .signInPage .signInForm .formLoginContainer .formPassword {
+  width: 100%;
+  height: 100px;
+}
+.wrap .signInPage .signInForm .formLoginContainer .formPassword p {
+  font-size: 16px;
+  margin-bottom: 10px;
+  font-weight: 700;
+  color: #999;
+}
+.wrap .signInPage .signInForm .formLoginContainer .formPassword input {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  padding-left: 10px;
+  border: 2px solid #3b5c41;
+  outline: none;
+  font-size: 17px;
+}
+.wrap .signInPage .signInForm .btnContainer {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wrap .signInPage .signInForm .btnContainer button {
   width: 100%;
   height: 50px;
   border-radius: 10px;

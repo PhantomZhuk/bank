@@ -16,7 +16,7 @@
         width: 100%;
         min-height: 100vh;
         background-color: #344e41;
-        display: flex;
+        display: none;
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -73,7 +73,7 @@
             justify-content: space-between;
             align-items: center;
             margin-top: 100px;
-            padding: 0 50px 20px 50px; 
+            padding: 0 50px 20px 50px;
 
             .formCardContainer {
                 width: 100%;
@@ -319,7 +319,7 @@
                         font-weight: 700;
                         color: #999;
                     }
-    
+
                     input {
                         width: 100%;
                         height: 40px;
@@ -333,6 +333,156 @@
             }
 
             .btnConatiner {
+                width: 100%;
+                height: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                button {
+                    width: 100%;
+                    height: 50px;
+                    border-radius: 10px;
+                    border: none;
+                    background: linear-gradient(to right, #3a5a40, #588157);
+                    color: #fff;
+                    font-size: 18px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .signInPage {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+
+        .signInForm {
+            width: 700px;
+            height: 450px;
+            box-shadow: 0 1px 7px 0 #333;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 100px;
+            padding: 0 50px 20px 50px;
+
+            .formCardConteiner {
+                width: 100%;
+                height: 150px;
+                display: flex;
+                justify-content: center;
+
+                .formCard {
+                    width: 420px;
+                    height: 230px;
+                    margin-top: -100px;
+                    position: absolute;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    .front {
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding: 20px;
+                        color: #fff;
+                        transform: perspective(600px) rotateY(0deg);
+                        position: absolute;
+                        transition: transform .6s linear;
+                        overflow: hidden;
+                        backface-visibility: hidden;
+                        background: linear-gradient(to right, #3a5a40, #588157);
+                        border-radius: 10px;
+
+                        .formCardHeader {
+                            width: 100%;
+                            height: 40px;
+                            font-size: 20px;
+                        }
+
+                        .PANConatiner {
+                            width: 100%;
+                            height: 50px;
+                            font-size: 32px;
+                        }
+
+                        .flexBox {
+                            width: 100%;
+                            height: 100px;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            font-size: 20px;
+                        }
+                    }
+                }
+            }
+
+            .formLoginContainer {
+                width: 100%;
+                height: 200px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+
+                .formLogin {
+                    width: 100%;
+                    height: 100px;
+
+                    p {
+                        font-size: 16px;
+                        margin-bottom: 10px;
+                        font-weight: 700;
+                        color: #999;
+                    }
+
+                    input {
+                        width: 100%;
+                        height: 40px;
+                        border-radius: 5px;
+                        padding-left: 10px;
+                        border: 2px solid #3b5c41;
+                        outline: none;
+                        font-size: 17px;
+                    }
+                }
+
+                .formPassword {
+                    width: 100%;
+                    height: 100px;
+
+                    p {
+                        font-size: 16px;
+                        margin-bottom: 10px;
+                        font-weight: 700;
+                        color: #999;
+                    }
+
+                    input {
+                        width: 100%;
+                        height: 40px;
+                        border-radius: 5px;
+                        padding-left: 10px;
+                        border: 2px solid #3b5c41;
+                        outline: none;
+                        font-size: 17px;
+                    }
+                }
+            }
+
+            .btnContainer {
                 width: 100%;
                 height: 50px;
                 display: flex;
