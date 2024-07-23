@@ -16,7 +16,7 @@
         width: 100%;
         min-height: 100vh;
         background-color: #344e41;
-        display: none;
+        display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -356,7 +356,7 @@
     .signInPage {
         width: 100%;
         min-height: 100vh;
-        display: flex;
+        display: none;
         justify-content: center;
         align-items: center;
         background-color: #fff;

@@ -72,3 +72,18 @@ function addUser() {
 $(`#createCard`).click(() => {
     addUser();
 });
+
+$(`#signIn`).click(() => {
+    $(`.startPage`).css(`display`, `none`);
+    $(`.signInPage`).css(`display`, `flex`);
+});
+
+$(`#signInBtn`).click(() => {
+    for (let user of users) {
+        if ($(`#signInLogin`).val() == user.logins && $(`#signInPassword`).val() == user.passwords) {
+            
+        }else {
+            
+        }
+    }
+});
