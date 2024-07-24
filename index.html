@@ -19,6 +19,10 @@
 
 <body>
 
+    <div class="popupNotification">
+        <p id="notification"></p>
+    </div>
+
     <div class="wrap">
         <div class="startPage">
             <h2>PhantomBank</h2>
@@ -44,8 +48,8 @@
                                 <div class="formCardExpires">
                                     <p>expires</p>
                                     <p class="monthYear">
-                                        <span id="month">mm</span>
-                                        <span id="year">yy</span>
+                                        <span class="month">mm</span>
+                                        <span class="year">yy</span>
                                     </p>
                                 </div>
                             </div>
@@ -64,7 +68,7 @@
                 </div>
                 <div class="cardNumberConatiner">
                     <p>Card Number</p>
-                    <input type="number" id="cardNumber" maxlength="16" max="16">
+                    <input type="text" id="cardNumber" maxlength="16" max="16">
                 </div>
                 <div class="formLoginContainer">
                     <div class="formLogin">
@@ -159,6 +163,53 @@
                 </div>
                 <div class="btnContainer">
                     <button id="signInBtn">Sign In</button>
+                </div>
+            </div>
+        </div>
+        <div class="mainPage">
+            <div class="homePage">
+                <header class="header">
+                    <div class="balanceConteiner">
+                        <p id="balance">100₴</p>
+                    </div>
+                    <div class="cardConteiner">
+                        <div class="formCard">
+                            <div class="front">
+                                <div class="formCardHeader">
+                                    <p>phantombank</p>
+                                </div>
+                                <div class="PANConatiner"><span class="startPAN">####</span><span class="centerPAN">#######</span><span class="endPAN">#####</span></div>
+                                <div class="flexBox">
+                                    <div class="formCardLogin">
+                                        <p>login</p>
+                                        <p class="fullName">full name</p>
+                                    </div>
+                                    <div class="formCardExpires">
+                                        <p>expires</p>
+                                        <p class="monthYear">
+                                            <span class="month">mm</span>
+                                            <span class="year">yy</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="back">
+                                <div class="backTopConatiner">
+                                    <div class="line"></div>
+                                </div>
+                                <div class="backBottomConatainer">
+                                    <div class="backCVVBox">
+                                        <div class="backCVV">CVV</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </header>
+                <div class="historyOperationsConteiner">
+
+                </div>
+                <div class="menuConteiner">
+
                 </div>
             </div>
         </div>
