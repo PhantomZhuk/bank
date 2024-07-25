@@ -188,4 +188,13 @@ $(`#signInBtn`).click(() => {
     }
 });
 
+$(`#homePageBtn`).addClass(`selectedPage`);
+$(`#homePageBtn`).click(()=>{
+    $(`#homePageBtn`).addClass(`selectedPage`);
+    $(`#transfersPageBtn`).removeClass(`selectedPage`);
+});
 
+$(`#transfersPageBtn`).click(()=>{
+    $(`#homePageBtn`).removeClass(`selectedPage`);
+    $(`#transfersPageBtn`).addClass(`selectedPage`);
+});

@@ -648,4 +648,7 @@
 }
 .wrap .mainPage .homePage .menuConteiner a i {
   font-size: 24px;
+}
+.wrap .mainPage .homePage .menuConteiner .selectedPage {
+  color: #588157;
 }/*# sourceMappingURL=style.css.map */
