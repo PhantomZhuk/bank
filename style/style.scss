@@ -676,13 +676,59 @@
                 height: 59vh;
                 background-color: #333;
                 border-radius: 50px;
+                display: flex;  
+                padding: 40px;
                 
+                .historyOperation {
+                    width: 100%;
+                    height: 80px;
+                    border-radius: 10px;
+                    background-color: #3a5a40;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 0 50px;
+
+                    .operationType {
+                        font-size: 20px;
+                        color: #fff;
+                    }
+
+                    .credits {
+                        font-size: 20px;
+                        color: #fff;
+                    }
+
+                    .operationTime {
+                        font-size: 20px;
+                        color: #fff;
+                    }
+                }
             }
 
             .menuConteiner {
                 width: 100%;
                 height: 10vh;
                 background-color: #262626;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+
+                a {
+                    width: 200px;
+                    height: 10vh;
+                    text-decoration: none;
+                    color: #fff;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 20px;
+
+                    i {
+                        font-size: 24px;
+                    }
+                }
             }
         }
     }

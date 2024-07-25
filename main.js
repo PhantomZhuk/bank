@@ -4,100 +4,14 @@ $(`#signUp`).click(() => {
 });
 
 $(`#formCVV`).mouseenter(() => {
-    $(`.front`).css(`transform`, `perspective(600px) rotateY(-180deg)`)
-    $(`.back`).css(`transform`, `perspective(600px) rotateY(0deg)`)
+    $(`.front`).css(`transform`, `perspective(600px) rotateY(-180deg)`);
+    $(`.back`).css(`transform`, `perspective(600px) rotateY(0deg)`);
 });
 
 $(`#formCVV`).mouseleave(() => {
-    $(`.front`).css(`transform`, `perspective(600px) rotateY(0deg)`)
-    $(`.back`).css(`transform`, `perspective(600px) rotateY(180deg)`)
+    $(`.front`).css(`transform`, `perspective(600px) rotateY(0deg)`);
+    $(`.back`).css(`transform`, `perspective(600px) rotateY(180deg)`);
 });
-
-let users = JSON.parse(localStorage.getItem('users')) || [];
-function UserCard(id, cards, cvv, logins, mm, yy, passwords) {
-    let balance = 100;
-    let trancactionLimit = 100;
-    let historyLogs = [];
-
-    function recordOperation(type, value, time) {
-        historyLogs.push({
-            operationType: type,
-            credits: value,
-            operationTime: time
-        });
-    }
-
-    return {
-        getCardOptions() {
-            return {
-                id,
-                balance,
-                trancactionLimit,
-                historyLogs
-            }
-        },
-
-        addUser() {
-            let user = {
-                id,
-                cardCost: balance,
-                cards,
-                cvv,
-                logins,
-                mm,
-                yy,
-                passwords
-            }
-
-            users.push(user);
-            localStorage.setItem('users', JSON.stringify(users));
-        },
-
-        putCredits(amount) {
-            if (amount <= trancactionLimit) {
-                balance += amount
-                recordOperation(`Received credits`, amount, new Date().toLocaleString());
-            } else {
-                console.log(`exceeded limit`)
-            }
-        },
-
-        takeCredits(amount) {
-            if (amount <= trancactionLimit) {
-                if (amount <= balance) {
-                    balance -= amount;
-                    recordOperation('Withdrawal money', amount, new Date().toLocaleString())
-                } else {
-                    console.log(`sorry not enough money`)
-                }
-            } else {
-                console.log(`exceeded limit`)
-            }
-        },
-
-        setTransactionLimit(amount) {
-            trancactionLimit = amount;
-            recordOperation('Change transaction limit', amount, new Date().toLocaleString())
-        },
-
-        transferCredits(amount, card) {
-            let TAX = 0.005;
-
-            let transferAmount = amount * TAX + amount;
-
-            if (transferAmount <= balance && transferAmount <= trancactionLimit) {
-                if (transferAmount <= balance) {
-                    this.takeCredits(transferAmount);
-                    card.putCredits(amount);
-                } else {
-                    console.log(`sorry not enough money`);
-                }
-            } else {
-                console.log(`exceeded limit`)
-            }
-        }
-    }
-}
 
 $(`#cardNumber`).on(`input`, () => {
     $(`.PANConatiner`).text($(`#cardNumber`).val());
@@ -119,46 +33,126 @@ $(`#formCVV`).on(`input`, () => {
     $(`.backCVV`).text($(`#formCVV`).val());
 });
 
-let i = 1;
+$(`#signIn`).click(() => {
+    $(`.startPage`).css(`display`, `none`);
+    $(`.signInPage`).css(`display`, `flex`);
+});
+
+let side = `front`;
+
+$(`.formCard`).mouseenter(() => {
+    $(`#front`).css(`transform`, `perspective(600px) rotateY(0deg) rotateX(0deg)`);
+    $(`#back`).css(`transform`, `perspective(600px) rotateY(180deg) rotateX(0deg)`);
+    $(`.centerPAN`).text(centerPAN);
+});
+
+$(`.formCard`).mouseleave(() => {
+    $(`#front`).css(`transform`, `perspective(600px) rotateY(0deg) rotateX(30deg)`);
+    $(`#back`).css(`transform`, `perspective(600px) rotateY(180deg) rotateX(30deg)`);
+    $(`.centerPAN`).text(`########`);
+});
+
+$(`.formCard`).click(() => {
+    if (side === `front`) {
+        $(`#front`).css(`transform`, `perspective(600px) rotateY(180deg) rotateX(0deg)`);
+        $(`#back`).css(`transform`, `perspective(600px) rotateY(0deg) rotateX(0deg)`);
+        side = `back`;
+    } else if (side === `back`) {
+        $(`#front`).css(`transform`, `perspective(600px) rotateY(0deg) rotateX(0deg)`);
+        $(`#back`).css(`transform`, `perspective(600px) rotateY(180deg) rotateX(0deg)`);
+        side = `front`;
+    }
+});
+
+
+
+let usersLS = JSON.parse(localStorage.getItem(`usersLS`)) || [];
+
+function UserCard(cards, cvv, login, mm, yy, password) {
+    let balance = 100;
+    let transactionLimit = 100;
+    let historyLogs = [];
+    let id = usersLS.length > 0 ? usersLS[usersLS.length - 1].id : 0;
+
+    function recordOperation(type, value, time) {
+        historyLogs.push({
+            operationType: type,
+            credits: value,
+            operationTime: time
+        });
+        displayOperations(historyLogs);
+    }
+
+    function displayOperations(historyLogs) {
+        $(`.historyOperationsContainer`).empty();
+        for (let el of historyLogs) {
+            $(`.historyOperationsContainer`).append(`
+                <div class="historyOperation">
+                    <div class="operationType">${el.operationType}</div> 
+                    <div class="credits">${el.credits}</div> 
+                    <div class="operationTime">${el.operationTime}</div>
+                </div>
+            `);
+        }
+    }
+
+    return {
+        getCardOptions() {
+            id++;
+            return {
+                id,
+                balance,
+                transactionLimit,
+                historyLogs,
+                cards,
+                cvv,
+                login,
+                mm,
+                yy,
+                password
+            };
+        },
+
+        addUser() {
+            id++;
+            let user = {
+                id,
+                cardCost: balance,
+                cards,
+                cvv,
+                login,
+                mm,
+                yy,
+                password
+            };
+
+            usersLS.push(user);
+            localStorage.setItem('usersLS', JSON.stringify(usersLS));
+        },
+    }
+}
+
+let user;
 $(`#createCard`).click(() => {
     let exists = false;
-    for (let el in users) {
-        if (users[el].cards == $(`#cardNumber`).val()) {
+    for (let el of usersLS) {
+        if (el.cards == $(`#cardNumber`).val()) {
             exists = true;
             break;
         }
     }
     if (!exists) {
-        let correctNumber = false;
-        if (/[0-9]/g.test($(`#cardNumber`).val())) {
-            correctNumber = true;
-        } else {
-            correctNumber = false;
-        }
-        let correctLogin;
-        if (/[A-Za-z]/g.test($(`#signUpLogin`).val()) && $(`#signUpLogin`).val().length >= 3 && !/[!@#$%^&*()_+\-=\|?/><.,`~]/g.test($(`#signUpLogin`).val()) && !/[0-9]/g.test($(`#signUpLogin`).val()) && !/\s/g.test($(`#signUpLogin`).val())) {
-            correctLogin = true;
-        } else {
-            correctLogin = false;
-        }
-        let correctPassword;
-        if (/[A-Za-z]/g.test($(`#signUpPassword`).val()) && $(`#signUpPassword`).val().length >= 6 && !/\s/g.test($(`#signUpPassword`).val())) {
-            correctPassword = true;
-        } else {
-            correctPassword = false;
-        }
-        if (correctNumber == true && $(`#formYear`).val() && $(`#formMonth`).val() && $(`#formCVV`).val().length == 3 && correctLogin == true && correctPassword == true) {
-            let user = new UserCard(i++, $(`#cardNumber`).val(), $(`#formCVV`).val(), $(`#signUpLogin`).val(), $(`#formMonth`).val(), $(`#formYear`).val(), $(`#signUpPassword`).val());
+        let correctNumber = /^[0-9]+$/.test($(`#cardNumber`).val());
+        let correctLogin = /^[A-Za-z]{3,}$/.test($(`#signUpLogin`).val());
+        let correctPassword = /^[A-Za-z]{6,}$/.test($(`#signUpPassword`).val());
+
+        if (correctNumber && $(`#formYear`).val() && $(`#formMonth`).val() && $(`#formCVV`).val().length == 3 && correctLogin && correctPassword) {
+            user = new UserCard($(`#cardNumber`).val(), $(`#formCVV`).val(), $(`#signUpLogin`).val(), $(`#formMonth`).val(), $(`#formYear`).val(), $(`#signUpPassword`).val());
             user.addUser();
             $(`.mainPage`).css(`display`, `flex`);
             $(`.signUpPage`).css(`display`, `none`);
         }
     }
-});
-
-$(`#signIn`).click(() => {
-    $(`.startPage`).css(`display`, `none`);
-    $(`.signInPage`).css(`display`, `flex`);
 });
 
 let centerPAN;
@@ -168,19 +162,19 @@ $(`#signInBtn`).click(() => {
     let password = $(`#signInPassword`).val();
     let userFound = false;
 
-    for (let user of users) {
-        if (login === user.logins && password === user.passwords) {
+    for (let user of usersLS) {
+        if (login === user.login && password === user.password) {
             userFound = true;
             $(`.mainPage`).css(`display`, `flex`);
             $(`.signInPage`).css(`display`, `none`);
             $(`.notificationContainer`).css(`display`, `none`);
-            $(`.fullName`).text(user.logins);
+            $(`.fullName`).text(user.login);
             $(`.month`).text(user.mm);
             $(`.year`).text(user.yy);
             $(`.backCVV`).text(user.cvv);
             $(`.startPAN`).text(user.cards.substring(0, 4));
             $(`.endPAN`).text(user.cards.substring(12, 16));
-            centerPAN = user.cards.substring(4, 12)
+            centerPAN = user.cards.substring(4, 12);
             break;
         }
     }
@@ -194,28 +188,4 @@ $(`#signInBtn`).click(() => {
     }
 });
 
-let side = `front`;
 
-$(`.formCard`).mouseenter(() => {
-    $(`.front`).css(`transform`, `perspective(600px) rotateY(0deg) rotateX(0deg)`);
-    $(`.back`).css(`transform`, `perspective(600px) rotateY(180deg) rotateX(0deg)`);
-    $(`.centerPAN`).text(centerPAN);
-});
-
-$(`.formCard`).mouseleave(() => {
-    $(`.front`).css(`transform`, `perspective(600px) rotateY(0deg) rotateX(30deg)`);
-    $(`.back`).css(`transform`, `perspective(600px) rotateY(180deg) rotateX(30deg)`);
-    $(`.centerPAN`).text(`########`);
-});
-
-$(`.formCard`).click(() => {
-    if (side == `front`) {
-        $(`.front`).css(`transform`, `perspective(600px) rotateY(180deg) rotateX(0deg)`);
-        $(`.back`).css(`transform`, `perspective(600px) rotateY(0deg) rotateX(0deg)`);
-        side = `back`
-    }else if(side == `back`){
-        $(`.front`).css(`transform`, `perspective(600px) rotateY(0deg) rotateX(0deg)`);
-        $(`.back`).css(`transform`, `perspective(600px) rotateY(180deg) rotateX(0deg)`);
-        side = `front`
-    }
-});
