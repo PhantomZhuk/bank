@@ -5,6 +5,22 @@
   font-family: "Montserrat";
 }
 
+.popupNotification {
+  width: 400px;
+  position: absolute;
+  bottom: 20px;
+  right: 30px;
+  background-color: #588157;
+  box-shadow: 0 0 5px 2px #333;
+  border-radius: 20px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  padding: 20px;
+  color: #fff;
+}
+
 .wrap {
   width: 100%;
   min-height: 100vh;
@@ -428,14 +444,6 @@
   outline: none;
   font-size: 17px;
 }
-.wrap .signInPage .signInForm .notificationContainer {
-  width: 100%;
-  height: 50px;
-  color: red;
-  font-size: 16px;
-  font-weight: 700;
-  display: none;
-}
 .wrap .signInPage .signInForm .btnContainer {
   width: 100%;
   height: 50px;
@@ -528,6 +536,9 @@
   width: 100%;
   height: 50px;
   font-size: 32px;
+}
+.wrap .mainPage .homePage .header .cardConteiner .formCard .front .PANConatiner span {
+  margin: 5px;
 }
 .wrap .mainPage .homePage .header .cardConteiner .formCard .front .flexBox {
   width: 100%;

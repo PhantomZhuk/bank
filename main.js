@@ -161,14 +161,61 @@ $(`#signIn`).click(() => {
     $(`.signInPage`).css(`display`, `flex`);
 });
 
+let centerPAN;
+
 $(`#signInBtn`).click(() => {
+    let login = $(`#signInLogin`).val();
+    let password = $(`#signInPassword`).val();
+    let userFound = false;
+
     for (let user of users) {
-        if ($(`#signInLogin`).val() == user.logins && $(`#signInPassword`).val() == user.passwords) {
+        if (login === user.logins && password === user.passwords) {
+            userFound = true;
             $(`.mainPage`).css(`display`, `flex`);
             $(`.signInPage`).css(`display`, `none`);
             $(`.notificationContainer`).css(`display`, `none`);
-        } else {
-            
+            $(`.fullName`).text(user.logins);
+            $(`.month`).text(user.mm);
+            $(`.year`).text(user.yy);
+            $(`.backCVV`).text(user.cvv);
+            $(`.startPAN`).text(user.cards.substring(0, 4));
+            $(`.endPAN`).text(user.cards.substring(12, 16));
+            centerPAN = user.cards.substring(4, 12)
+            break;
         }
+    }
+
+    if (!userFound) {
+        $(`.popupNotification`).css(`display`, `flex`);
+        $(`#notification`).text(`Login or password is incorrect!`);
+        setTimeout(() => {
+            $(`.popupNotification`).css(`display`, `none`);
+        }, 5000);
+    }
+});
+
+let side = `front`;
+
+$(`.formCard`).mouseenter(() => {
+    $(`.front`).css(`transform`, `perspective(600px) rotateY(0deg) rotateX(0deg)`);
+    $(`.back`).css(`transform`, `perspective(600px) rotateY(180deg) rotateX(0deg)`);
+    $(`.centerPAN`).text(centerPAN);
+});
+
+$(`.formCard`).mouseleave(() => {
+    $(`.front`).css(`transform`, `perspective(600px) rotateY(0deg) rotateX(30deg)`);
+    $(`.back`).css(`transform`, `perspective(600px) rotateY(180deg) rotateX(30deg)`);
+    $(`.centerPAN`).text(`########`);
+});
+
+$(`.formCard`).click(() => {
+    if (side == `front`) {
+        $(`.front`).css(`transform`, `perspective(600px) rotateY(180deg) rotateX(0deg)`);
+        $(`.back`).css(`transform`, `perspective(600px) rotateY(0deg) rotateX(0deg)`);
+        side = `back`
+    }else if(side == `back`){
+        $(`.front`).css(`transform`, `perspective(600px) rotateY(0deg) rotateX(0deg)`);
+        $(`.back`).css(`transform`, `perspective(600px) rotateY(180deg) rotateX(0deg)`);
+        side = `front`
     }
 });
