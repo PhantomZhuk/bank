@@ -188,13 +188,17 @@ $(`#signInBtn`).click(() => {
     }
 });
 
-$(`#homePageBtn`).addClass(`selectedPage`);
-$(`#homePageBtn`).click(()=>{
-    $(`#homePageBtn`).addClass(`selectedPage`);
-    $(`#transfersPageBtn`).removeClass(`selectedPage`);
+$(`.homePageBtn`).addClass(`selectedPage`);
+$(`.homePageBtn`).click(()=>{
+    $(`.homePageBtn`).addClass(`selectedPage`);
+    $(`.transfersPageBtn`).removeClass(`selectedPage`);
+    $(`.creditTransfersPage`).css(`display`, `none`);
+    $(`.homePage`).css(`display`, `flex`);
 });
 
-$(`#transfersPageBtn`).click(()=>{
-    $(`#homePageBtn`).removeClass(`selectedPage`);
-    $(`#transfersPageBtn`).addClass(`selectedPage`);
+$(`.transfersPageBtn`).click(()=>{
+    $(`.homePageBtn`).removeClass(`selectedPage`);
+    $(`.transfersPageBtn`).addClass(`selectedPage`);
+    $(`.homePage`).css(`display`, `none`);
+    $(`.creditTransfersPage`).css(`display`, `flex`);
 });

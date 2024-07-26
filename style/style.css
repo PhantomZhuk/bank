@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   margin: 0;
   padding: 0;
@@ -650,5 +651,96 @@
   font-size: 24px;
 }
 .wrap .mainPage .homePage .menuConteiner .selectedPage {
+  color: #588157;
+}
+.wrap .mainPage .creditTransfersPage {
+  width: 100%;
+  min-height: 100vh;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  background-color: #588157;
+}
+.wrap .mainPage .creditTransfersPage .creditTransfersContainer {
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 50px 0 50px;
+}
+.wrap .mainPage .creditTransfersPage .creditTransfersContainer .searchCardContainer {
+  width: 100%;
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+}
+.wrap .mainPage .creditTransfersPage .creditTransfersContainer .searchCardContainer p {
+  font-size: 24px;
+  color: #fff;
+}
+.wrap .mainPage .creditTransfersPage .creditTransfersContainer .searchCardContainer .inputContainer {
+  width: 100%;
+  height: 15vh;
+  display: flex;
+  align-items: center;
+}
+.wrap .mainPage .creditTransfersPage .creditTransfersContainer .searchCardContainer .inputContainer input {
+  width: 600px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.2); /* Білий фон з прозорістю */
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px); /* Розмиття фону */
+  -webkit-backdrop-filter: blur(10px); /* Для підтримки в Safari */
+  color: #fff;
+  outline: none;
+  margin-right: 50px;
+  padding-left: 20px;
+  font-size: 24px;
+}
+.wrap .mainPage .creditTransfersPage .creditTransfersContainer .searchCardContainer .inputContainer button {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  background-color: #333;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.wrap .mainPage .creditTransfersPage .creditTransfersContainer .cardContactsContainer {
+  width: 100%;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #333333;
+  border-radius: 20px;
+}
+.wrap .mainPage .creditTransfersPage .menuConteiner {
+  width: 100%;
+  height: 10vh;
+  background-color: #262626;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.wrap .mainPage .creditTransfersPage .menuConteiner a {
+  width: 200px;
+  height: 10vh;
+  text-decoration: none;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+.wrap .mainPage .creditTransfersPage .menuConteiner a i {
+  font-size: 24px;
+}
+.wrap .mainPage .creditTransfersPage .menuConteiner .selectedPage {
   color: #588157;
 }/*# sourceMappingURL=style.css.map */
