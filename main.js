@@ -96,6 +96,14 @@ function UserCard(cards, cvv, login, mm, yy, password) {
         }
     }
 
+    function displayError(text) {
+        $(`.popupNotification`).css(`display`, `flex`);
+        $(`#notification`).text(text);
+        setTimeout(() => {
+            $(`.popupNotification`).css(`display`, `none`);
+        }, 5000);
+    }
+
     return {
         getCardOptions() {
             id++;
@@ -129,6 +137,49 @@ function UserCard(cards, cvv, login, mm, yy, password) {
             usersLS.push(user);
             localStorage.setItem('usersLS', JSON.stringify(usersLS));
         },
+
+        putCredits(amount) {
+            if (amount <= transactionLimit) {
+                balance += amount
+                recordOperation(`Received credits`, amount, new Date().toLocaleString());
+            } else {
+                displayError(`exceeded limit`);
+            }
+        },
+
+        takeCredits(amount) {
+            if (amount <= trancactionLimit) {
+                if (amount <= balance) {
+                    balance -= amount;
+                    recordOperation('Withdrawal money', amount, new Date().toLocaleString())
+                } else {
+
+                    console.log(`sorry not enough money`)
+                }
+            } else {
+                console.log(`exceeded limit`)
+            }
+        },
+        setTransactionLimit(amount) {
+            trancactionLimit = amount;
+            recordOperation('Change transaction limit', amount, new Date().toLocaleString())
+        },
+        transferCredits(amount, card) {
+            let TAX = 0.005;
+
+            let transferAmount = amount * TAX + amount;
+
+            if (transferAmount <= balance && transferAmount <= trancactionLimit) {
+                if (transferAmount <= balance) {
+                    this.takeCredits(transferAmount);
+                    card.putCredits(amount);
+                } else {
+                    console.log(`sorry not enough money`);
+                }
+            } else {
+                console.log(`exceeded limit`)
+            }
+        }
     }
 }
 
@@ -189,16 +240,40 @@ $(`#signInBtn`).click(() => {
 });
 
 $(`.homePageBtn`).addClass(`selectedPage`);
-$(`.homePageBtn`).click(()=>{
+$(`.homePageBtn`).click(() => {
     $(`.homePageBtn`).addClass(`selectedPage`);
     $(`.transfersPageBtn`).removeClass(`selectedPage`);
     $(`.creditTransfersPage`).css(`display`, `none`);
     $(`.homePage`).css(`display`, `flex`);
 });
 
-$(`.transfersPageBtn`).click(()=>{
+$(`.transfersPageBtn`).click(() => {
     $(`.homePageBtn`).removeClass(`selectedPage`);
     $(`.transfersPageBtn`).addClass(`selectedPage`);
     $(`.homePage`).css(`display`, `none`);
     $(`.creditTransfersPage`).css(`display`, `flex`);
+});
+
+let user2;
+$(`#searchBtn`).click(() => {
+    for (let user of usersLS) {
+        if (user.cards == $(`#inputSearchCard`).val()) {
+            user2 = new UserCard(user.cards, user.cvv, user.login, user.mm, user.yy, user.password);
+        }
+    }
+});
+
+
+$('#Send').click(function () {
+    $(`.moneyTransferContainer`).css(`display`, `none`);
+    $(`.successfulOperationContainer`).css(`display`, `flex`);
+    if (!$('svg').hasClass("animate")) {
+        $('svg').addClass("animate");
+
+        setTimeout(function () {
+            $('svg').removeClass("animate");
+            $(`.successfulOperationContainer`).css(`display`, `none`);
+            $(`.creditTransfersContainer`).css(`display`, `flex`);
+        }, 1700);
+    }
 });

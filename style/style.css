@@ -33,7 +33,7 @@
   width: 100%;
   min-height: 100vh;
   background-color: #344e41;
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -465,14 +465,14 @@
 .wrap .mainPage {
   width: 100%;
   min-height: 100vh;
-  display: none;
+  display: flex;
   flex-direction: column;
   align-items: center;
 }
 .wrap .mainPage .homePage {
   width: 100%;
   min-height: 100vh;
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
@@ -656,7 +656,7 @@
 .wrap .mainPage .creditTransfersPage {
   width: 100%;
   min-height: 100vh;
-  display: none;
+  display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #588157;
@@ -664,7 +664,7 @@
 .wrap .mainPage .creditTransfersPage .creditTransfersContainer {
   width: 100%;
   height: 90vh;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   padding: 50px 50px 0 50px;
@@ -688,12 +688,15 @@
 .wrap .mainPage .creditTransfersPage .creditTransfersContainer .searchCardContainer .inputContainer input {
   width: 600px;
   height: 50px;
-  background: rgba(255, 255, 255, 0.2); /* Білий фон з прозорістю */
+  background: rgba(255, 255, 255, 0.2);
+  /* Білий фон з прозорістю */
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px); /* Розмиття фону */
-  -webkit-backdrop-filter: blur(10px); /* Для підтримки в Safari */
+  backdrop-filter: blur(10px);
+  /* Розмиття фону */
+  -webkit-backdrop-filter: blur(10px);
+  /* Для підтримки в Safari */
   color: #fff;
   outline: none;
   margin-right: 50px;
@@ -718,6 +721,158 @@
   align-items: center;
   background-color: #333333;
   border-radius: 20px;
+}
+.wrap .mainPage .creditTransfersPage .moneyTransferContainer {
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wrap .mainPage .creditTransfersPage .moneyTransferContainer .moneyTransferForm {
+  width: 700px;
+  height: 700px;
+  border-radius: 10px;
+  background-color: #333333;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+.wrap .mainPage .creditTransfersPage .moneyTransferContainer .moneyTransferForm .userInfoContainer {
+  width: 100%;
+  height: 100px;
+  background-color: #262626;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  color: #fff;
+}
+.wrap .mainPage .creditTransfersPage .moneyTransferContainer .moneyTransferForm .userInfoContainer i {
+  font-size: 50px;
+}
+.wrap .mainPage .creditTransfersPage .moneyTransferContainer .moneyTransferForm .userInfoContainer .userInfo {
+  width: 87%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.wrap .mainPage .creditTransfersPage .moneyTransferContainer .moneyTransferForm .userInfoContainer .userInfo .nameInfo {
+  height: 45%;
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+}
+.wrap .mainPage .creditTransfersPage .moneyTransferContainer .moneyTransferForm .userInfoContainer .userInfo .cardInfo {
+  height: 45%;
+  display: flex;
+  align-items: center;
+}
+.wrap .mainPage .creditTransfersPage .moneyTransferContainer .moneyTransferForm .weaveAmountConatiner {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.wrap .mainPage .creditTransfersPage .moneyTransferContainer .moneyTransferForm .weaveAmountConatiner .balance {
+  font-size: 36px;
+  color: #ccc;
+  margin-bottom: 10px;
+}
+.wrap .mainPage .creditTransfersPage .moneyTransferContainer .moneyTransferForm .weaveAmountConatiner input {
+  background: transparent;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  outline: none;
+  width: 200px;
+  height: 50px;
+  padding-left: 20px;
+  font-size: 42px;
+  color: #fff;
+}
+.wrap .mainPage .creditTransfersPage .moneyTransferContainer .moneyTransferForm .weaveAmountConatiner input[type=number]::-webkit-outer-spin-button,
+.wrap .mainPage .creditTransfersPage .moneyTransferContainer .moneyTransferForm .weaveAmountConatiner input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.wrap .mainPage .creditTransfersPage .moneyTransferContainer .moneyTransferForm .btnContainer {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wrap .mainPage .creditTransfersPage .moneyTransferContainer .moneyTransferForm .btnContainer button {
+  width: 100%;
+  height: 50px;
+  border-radius: 10px;
+  background-color: #3a5a40;
+  color: #fff;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+}
+.wrap .mainPage .creditTransfersPage .successfulOperationContainer {
+  width: 100%;
+  height: 90vh;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.wrap .mainPage .creditTransfersPage .successfulOperationContainer .mainContainer {
+  width: 500px;
+  height: 500px;
+  background-color: #333;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: 1.7s ease forwards draw;
+  opacity: 1;
+}
+.wrap .mainPage .creditTransfersPage .successfulOperationContainer .mainContainer svg {
+  width: 80%;
+  height: 80%;
+}
+.wrap .mainPage .creditTransfersPage .successfulOperationContainer .mainContainer path {
+  stroke-dasharray: 99.4757843018;
+  stroke-dashoffset: -99.4757843018;
+  fill: transparent;
+}
+.wrap .mainPage .creditTransfersPage .successfulOperationContainer .mainContainer svg.animate path {
+  animation: 1.7s ease forwards draw;
+  opacity: 1;
+}
+@keyframes draw {
+  0% {
+    opacity: 1;
+    stroke-dashoffset: -99.4757843018;
+    fill: transparent;
+    transform: translateY(0);
+  }
+  35% {
+    stroke-dashoffset: 0;
+    fill: transparent;
+  }
+  60% {
+    fill: #3da35a;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    fill: #3da35a;
+    stroke-dashoffset: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+  }
 }
 .wrap .mainPage .creditTransfersPage .menuConteiner {
   width: 100%;

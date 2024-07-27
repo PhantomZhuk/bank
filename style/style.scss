@@ -32,7 +32,7 @@
         width: 100%;
         min-height: 100vh;
         background-color: #344e41;
-        display: flex;
+        display: none;
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -522,14 +522,14 @@
     .mainPage {
         width: 100%;
         min-height: 100vh;
-        display: none;
+        display: flex;
         flex-direction: column;
         align-items: center;
 
         .homePage {
             width: 100%;
             min-height: 100vh;
-            display: flex;
+            display: none;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
@@ -542,12 +542,12 @@
                 justify-content: space-between;
                 align-items: center;
                 padding: 0 200px;
-                
+
                 .balanceConteiner {
                     width: 40%;
                     height: 100%;
                     padding-top: 100px;
-                    
+
                     p {
                         font-size: 72px;
                         color: #fff;
@@ -561,7 +561,7 @@
                     display: flex;
                     justify-content: flex-end;
                     align-items: center;
-                    
+
                     .formCard {
                         width: 420px;
                         height: 230px;
@@ -569,7 +569,7 @@
                         display: flex;
                         justify-content: center;
                         align-items: center;
-    
+
                         .front {
                             width: 100%;
                             height: 100%;
@@ -586,13 +586,13 @@
                             backface-visibility: hidden;
                             background-color: #3a5a40;
                             border-radius: 10px;
-    
+
                             .formCardHeader {
                                 width: 100%;
                                 height: 40px;
                                 font-size: 20px;
                             }
-    
+
                             .PANConatiner {
                                 width: 100%;
                                 height: 50px;
@@ -602,7 +602,7 @@
                                     margin: 5px;
                                 }
                             }
-    
+
                             .flexBox {
                                 width: 100%;
                                 height: 100px;
@@ -612,7 +612,7 @@
                                 font-size: 20px;
                             }
                         }
-    
+
                         .back {
                             width: 100%;
                             height: 100%;
@@ -627,21 +627,21 @@
                             flex-direction: column;
                             justify-content: space-between;
                             align-items: center;
-    
+
                             .backTopConatiner {
                                 width: 100%;
                                 height: 50%;
                                 display: flex;
                                 justify-content: center;
                                 align-items: center;
-    
+
                                 .line {
                                     width: 100%;
                                     height: 35px;
                                     background-color: #000;
                                 }
                             }
-    
+
                             .backBottomConatainer {
                                 width: 100%;
                                 height: 50%;
@@ -649,7 +649,7 @@
                                 justify-content: flex-end;
                                 align-items: flex-end;
                                 padding: 20px;
-    
+
                                 .backCVVBox {
                                     width: 100px;
                                     height: 50px;
@@ -660,7 +660,7 @@
                                     color: #fff;
                                     font-size: 20px;
                                     padding: 5px;
-    
+
                                     p {
                                         font-size: 16px;
                                     }
@@ -676,9 +676,9 @@
                 height: 59vh;
                 background-color: #333;
                 border-radius: 50px;
-                display: flex;  
+                display: flex;
                 padding: 40px;
-                
+
                 .historyOperation {
                     width: 100%;
                     height: 80px;
@@ -739,7 +739,7 @@
         .creditTransfersPage {
             width: 100%;
             min-height: 100vh;
-            display: none;
+            display: flex;
             flex-direction: column;
             align-items: center;
             background-color: #588157;
@@ -747,7 +747,7 @@
             .creditTransfersContainer {
                 width: 100%;
                 height: 90vh;
-                display: flex;
+                display: none;
                 flex-direction: column;
                 align-items: center;
                 padding: 50px 50px 0 50px;
@@ -772,12 +772,15 @@
                         input {
                             width: 600px;
                             height: 50px;
-                            background: rgba(255, 255, 255, 0.2); /* Білий фон з прозорістю */
+                            background: rgba(255, 255, 255, 0.2);
+                            /* Білий фон з прозорістю */
                             border-radius: 10px;
                             border: 1px solid rgba(255, 255, 255, 0.18);
                             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                            backdrop-filter: blur(10px); /* Розмиття фону */
-                            -webkit-backdrop-filter: blur(10px); /* Для підтримки в Safari */
+                            backdrop-filter: blur(10px);
+                            /* Розмиття фону */
+                            -webkit-backdrop-filter: blur(10px);
+                            /* Для підтримки в Safari */
                             color: #fff;
                             outline: none;
                             margin-right: 50px;
@@ -806,6 +809,180 @@
                     align-items: center;
                     background-color: #333333;
                     border-radius: 20px;
+                }
+            }
+
+            .moneyTransferContainer {
+                width: 100%;
+                height: 90vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .moneyTransferForm {
+                    width: 700px;
+                    height: 700px;
+                    border-radius: 10px;
+                    background-color: #333333;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 20px;
+
+                    .userInfoContainer {
+                        width: 100%;
+                        height: 100px;
+                        background-color: #262626;
+                        border-radius: 10px;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding: 20px 40px;
+                        color: #fff;
+
+                        i {
+                            font-size: 50px;
+                        }
+
+                        .userInfo {
+                            width: 87%;
+                            height: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: space-between;
+
+                            .nameInfo {
+                                height: 45%;
+                                font-size: 26px;
+                                display: flex;
+                                align-items: center;
+                            }
+
+                            .cardInfo {
+                                height: 45%;
+                                display: flex;
+                                align-items: center;
+                            }
+                        }
+                    }
+
+                    .weaveAmountConatiner {
+                        width: 100%;
+                        height: 500px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+
+                        .balance {
+                            font-size: 36px;
+                            color: #ccc;
+                            margin-bottom: 10px;
+                        }
+
+                        input {
+                            background: transparent;
+                            border: 2px solid #fff;
+                            border-radius: 10px;
+                            outline: none;
+                            width: 200px;
+                            height: 50px;
+                            padding-left: 20px;
+                            font-size: 42px;
+                            color: #fff;
+                        }
+
+                        input[type=number]::-webkit-outer-spin-button,
+                        input[type=number]::-webkit-inner-spin-button {
+                            -webkit-appearance: none;
+                            margin: 0;
+                        }
+                    }
+
+                    .btnContainer {
+                        width: 100%;
+                        height: 50px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        button {
+                            width: 100%;
+                            height: 50px;
+                            border-radius: 10px;
+                            background-color: #3a5a40;
+                            color: #fff;
+                            font-size: 20px;
+                            border: none;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+
+            .successfulOperationContainer {
+                width: 100%;
+                height: 90vh;
+                display: none;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                .mainContainer {
+                    width: 500px;
+                    height: 500px;
+                    background-color: #333;
+                    border-radius: 20px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    animation: 1.7s ease forwards draw;
+                    opacity: 1;
+
+                    svg {
+                        width: 80%;
+                        height: 80%;
+                    }
+
+                    path {
+                        stroke-dasharray: 99.47578430175781;
+                        stroke-dashoffset: -99.47578430175781;
+                        fill: transparent;
+                    }
+
+                    svg.animate path {
+                        animation: 1.7s ease forwards draw;
+                        opacity: 1;
+                    }
+
+                    @keyframes draw {
+                        0% {
+                            opacity: 1;
+                            stroke-dashoffset: -99.47578430175781;
+                            fill: transparent;
+                            transform: translateY(0);
+                        }
+
+                        35% {
+                            stroke-dashoffset: 0;
+                            fill: transparent;
+                        }
+
+                        60% {
+                            fill: #3da35a;
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+
+                        100% {
+                            fill: #3da35a;
+                            stroke-dashoffset: 0;
+                            opacity: 0;
+                            transform: translateY(-10px);
+                        }
+                    }
                 }
             }
 
