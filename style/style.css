@@ -33,7 +33,7 @@
   width: 100%;
   min-height: 100vh;
   background-color: #344e41;
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -465,14 +465,14 @@
 .wrap .mainPage {
   width: 100%;
   min-height: 100vh;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
 }
 .wrap .mainPage .homePage {
   width: 100%;
   min-height: 100vh;
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
@@ -605,6 +605,10 @@
   border-radius: 50px;
   display: flex;
   padding: 40px;
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  flex-direction: column;
 }
 .wrap .mainPage .homePage .historyOperationsConteiner .historyOperation {
   width: 100%;
@@ -615,6 +619,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 50px;
+  margin: 10px;
 }
 .wrap .mainPage .homePage .historyOperationsConteiner .historyOperation .operationType {
   font-size: 20px;
@@ -627,6 +632,9 @@
 .wrap .mainPage .homePage .historyOperationsConteiner .historyOperation .operationTime {
   font-size: 20px;
   color: #fff;
+}
+.wrap .mainPage .homePage .historyOperationsConteiner::-webkit-scrollbar {
+  display: none;
 }
 .wrap .mainPage .homePage .menuConteiner {
   width: 100%;
@@ -656,7 +664,7 @@
 .wrap .mainPage .creditTransfersPage {
   width: 100%;
   min-height: 100vh;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   background-color: #588157;
@@ -664,7 +672,7 @@
 .wrap .mainPage .creditTransfersPage .creditTransfersContainer {
   width: 100%;
   height: 90vh;
-  display: none;
+  display: flex;
   flex-direction: column;
   align-items: center;
   padding: 50px 50px 0 50px;
@@ -725,7 +733,7 @@
 .wrap .mainPage .creditTransfersPage .moneyTransferContainer {
   width: 100%;
   height: 90vh;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
 }
@@ -761,16 +769,22 @@
   flex-direction: column;
   justify-content: space-between;
 }
-.wrap .mainPage .creditTransfersPage .moneyTransferContainer .moneyTransferForm .userInfoContainer .userInfo .nameInfo {
+.wrap .mainPage .creditTransfersPage .moneyTransferContainer .moneyTransferForm .userInfoContainer .userInfo .nameInfoContainer {
   height: 45%;
   font-size: 26px;
   display: flex;
   align-items: center;
 }
-.wrap .mainPage .creditTransfersPage .moneyTransferContainer .moneyTransferForm .userInfoContainer .userInfo .cardInfo {
+.wrap .mainPage .creditTransfersPage .moneyTransferContainer .moneyTransferForm .userInfoContainer .userInfo .nameInfoContainer span {
+  margin-left: 10px;
+}
+.wrap .mainPage .creditTransfersPage .moneyTransferContainer .moneyTransferForm .userInfoContainer .userInfo .cardInfoContainer {
   height: 45%;
   display: flex;
   align-items: center;
+}
+.wrap .mainPage .creditTransfersPage .moneyTransferContainer .moneyTransferForm .userInfoContainer .userInfo .cardInfoContainer span {
+  margin-left: 10px;
 }
 .wrap .mainPage .creditTransfersPage .moneyTransferContainer .moneyTransferForm .weaveAmountConatiner {
   width: 100%;
@@ -780,7 +794,7 @@
   justify-content: center;
   align-items: center;
 }
-.wrap .mainPage .creditTransfersPage .moneyTransferContainer .moneyTransferForm .weaveAmountConatiner .balance {
+.wrap .mainPage .creditTransfersPage .moneyTransferContainer .moneyTransferForm .weaveAmountConatiner .amountMoneyTransfer {
   font-size: 36px;
   color: #ccc;
   margin-bottom: 10px;

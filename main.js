@@ -64,15 +64,28 @@ $(`.formCard`).click(() => {
     }
 });
 
+function displayNotification(text) {
+    $(`.popupNotification`).css(`display`, `flex`);
+    $(`#notification`).text(text);
+    setTimeout(() => {
+        $(`.popupNotification`).css(`display`, `none`);
+    }, 5000);
+}
 
+let usersLS = JSON.parse(localStorage.getItem('usersLS')) || [];
 
-let usersLS = JSON.parse(localStorage.getItem(`usersLS`)) || [];
-
-function UserCard(cards, cvv, login, mm, yy, password) {
-    let balance = 100;
-    let transactionLimit = 100;
+function UserCard(cards, cvv, login, mm, yy, password, id, userBalance = 100) {
+    let balance = userBalance;
+    let trancactionLimit = 100;
     let historyLogs = [];
-    let id = usersLS.length > 0 ? usersLS[usersLS.length - 1].id : 0;
+
+    // Відновлення історії операцій з локального сховища
+    let storedUser = usersLS.find(user => user.id === id);
+    if (storedUser) {
+        balance = storedUser.balance;
+        trancactionLimit = storedUser.trancactionLimit;
+        historyLogs = storedUser.historyLogs;
+    }
 
     function recordOperation(type, value, time) {
         historyLogs.push({
@@ -80,37 +93,51 @@ function UserCard(cards, cvv, login, mm, yy, password) {
             credits: value,
             operationTime: time
         });
+        updateLocalStorage();
         displayOperations(historyLogs);
     }
 
     function displayOperations(historyLogs) {
-        $(`.historyOperationsContainer`).empty();
+        $(`.historyOperationsConteiner`).empty();
         for (let el of historyLogs) {
-            $(`.historyOperationsContainer`).append(`
+            $(`.historyOperationsConteiner`).append(`
                 <div class="historyOperation">
                     <div class="operationType">${el.operationType}</div> 
-                    <div class="credits">${el.credits}</div> 
+                    <div class="credits">${el.credits}₴</div> 
                     <div class="operationTime">${el.operationTime}</div>
                 </div>
             `);
         }
     }
 
-    function displayError(text) {
-        $(`.popupNotification`).css(`display`, `flex`);
-        $(`#notification`).text(text);
-        setTimeout(() => {
-            $(`.popupNotification`).css(`display`, `none`);
-        }, 5000);
+    function updateLocalStorage() {
+        let updatedUser = {
+            id,
+            balance,
+            trancactionLimit,
+            historyLogs,
+            cards,
+            cvv,
+            login,
+            mm,
+            yy,
+            password
+        };
+        let userIndex = usersLS.findIndex(user => user.id === id);
+        if (userIndex !== -1) {
+            usersLS[userIndex] = updatedUser;
+        } else {
+            usersLS.push(updatedUser);
+        }
+        localStorage.setItem('usersLS', JSON.stringify(usersLS));
     }
 
     return {
         getCardOptions() {
-            id++;
             return {
                 id,
                 balance,
-                transactionLimit,
+                trancactionLimit,
                 historyLogs,
                 cards,
                 cvv,
@@ -122,10 +149,11 @@ function UserCard(cards, cvv, login, mm, yy, password) {
         },
 
         addUser() {
-            id++;
             let user = {
                 id,
-                cardCost: balance,
+                balance,
+                trancactionLimit,
+                historyLogs,
                 cards,
                 cvv,
                 login,
@@ -139,11 +167,11 @@ function UserCard(cards, cvv, login, mm, yy, password) {
         },
 
         putCredits(amount) {
-            if (amount <= transactionLimit) {
-                balance += amount
-                recordOperation(`Received credits`, amount, new Date().toLocaleString());
+            if (amount <= trancactionLimit) {
+                balance += amount;
+                recordOperation('Received credits', amount, new Date().toLocaleString());
             } else {
-                displayError(`exceeded limit`);
+                displayNotification('Exceeded limit!');
             }
         },
 
@@ -151,93 +179,153 @@ function UserCard(cards, cvv, login, mm, yy, password) {
             if (amount <= trancactionLimit) {
                 if (amount <= balance) {
                     balance -= amount;
-                    recordOperation('Withdrawal money', amount, new Date().toLocaleString())
+                    recordOperation('Withdrawal money', amount, new Date().toLocaleString());
                 } else {
-
-                    console.log(`sorry not enough money`)
+                    displayNotification('Sorry not enough money!');
                 }
             } else {
-                console.log(`exceeded limit`)
+                displayNotification('Exceeded limit!');
             }
         },
+
         setTransactionLimit(amount) {
             trancactionLimit = amount;
-            recordOperation('Change transaction limit', amount, new Date().toLocaleString())
+            recordOperation('Change transaction limit', amount, new Date().toLocaleString());
         },
+
         transferCredits(amount, card) {
             let TAX = 0.005;
-
             let transferAmount = amount * TAX + amount;
 
             if (transferAmount <= balance && transferAmount <= trancactionLimit) {
-                if (transferAmount <= balance) {
-                    this.takeCredits(transferAmount);
-                    card.putCredits(amount);
-                } else {
-                    console.log(`sorry not enough money`);
-                }
+                this.takeCredits(transferAmount);
+                card.putCredits(amount);
             } else {
-                console.log(`exceeded limit`)
+                displayNotification('Exceeded limit or not enough money!');
             }
+        },
+
+        operationsDisplay(historyLogs) {
+            displayOperations(historyLogs);
         }
     }
 }
 
-let user;
+let numberUsers = 0;
+let user1;
+let user2;
+let centerPAN;
 $(`#createCard`).click(() => {
-    let exists = false;
-    for (let el of usersLS) {
-        if (el.cards == $(`#cardNumber`).val()) {
-            exists = true;
-            break;
+    if (usersLS.length == 0) {
+        let exists = false;
+        for (let el of usersLS) {
+            if (el.cards == $(`#cardNumber`).val()) {
+                exists = true;
+                break;
+            }
         }
-    }
-    if (!exists) {
-        let correctNumber = /^[0-9]+$/.test($(`#cardNumber`).val());
-        let correctLogin = /^[A-Za-z]{3,}$/.test($(`#signUpLogin`).val());
-        let correctPassword = /^[A-Za-z]{6,}$/.test($(`#signUpPassword`).val());
+        if (!exists) {
+            let correctNumber = /^[0-9]+$/.test($(`#cardNumber`).val());
+            let correctLogin = /^[A-Za-z]{3,}$/.test($(`#signUpLogin`).val());
+            let correctPassword = /^[A-Za-z]{6,}$/.test($(`#signUpPassword`).val());
 
-        if (correctNumber && $(`#formYear`).val() && $(`#formMonth`).val() && $(`#formCVV`).val().length == 3 && correctLogin && correctPassword) {
-            user = new UserCard($(`#cardNumber`).val(), $(`#formCVV`).val(), $(`#signUpLogin`).val(), $(`#formMonth`).val(), $(`#formYear`).val(), $(`#signUpPassword`).val());
-            user.addUser();
-            $(`.mainPage`).css(`display`, `flex`);
-            $(`.signUpPage`).css(`display`, `none`);
+            if (correctNumber && $(`#formYear`).val() && $(`#formMonth`).val() && $(`#formCVV`).val().length == 3 && correctLogin && correctPassword) {
+                user1 = new UserCard($(`#cardNumber`).val(), $(`#formCVV`).val(), $(`#signUpLogin`).val(), $(`#formMonth`).val(), $(`#formYear`).val(), $(`#signUpPassword`).val(), 1);
+                user1.addUser();
+                $(`.mainPage`).css(`display`, `flex`);
+                $(`.signUpPage`).css(`display`, `none`);
+                $(`.notificationContainer`).css(`display`, `none`);
+                $(`.fullName`).text(user1.getCardOptions().login);
+                $(`.month`).text(user1.getCardOptions().mm);
+                $(`.year`).text(user1.getCardOptions().yy);
+                $(`.backCVV`).text(user1.getCardOptions().cvv);
+                $(`.PANConatiner`).empty();
+                $(`.PANConatiner`).append(`
+                    <span class="startPAN">####</span>
+                    <spanclass="centerPAN">########</span>
+                    <span class="endPAN">#####</span>
+                    `);
+                $(`.startPAN`).text(user1.getCardOptions().cards.substring(0, 4));
+                $(`.endPAN`).text(user1.getCardOptions().cards.substring(12, 16));
+                centerPAN = user1.getCardOptions().cards.substring(4, 12);
+                $(`.amountMoneyTransfer`).text(user1.getCardOptions().balance.toFixed(2) + `₴`);
+                $(`#balanceHomePage`).text(user1.getCardOptions().balance.toFixed(2) + `₴`);
+                user1.operationsDisplay(user1.getCardOptions().historyLogs);
+            }
+            numberUsers++;
         }
+    } else if (usersLS.length == 1) {
+        let exists = false;
+        for (let el of usersLS) {
+            if (el.cards == $(`#cardNumber`).val()) {
+                exists = true;
+                break;
+            }
+        }
+        if (!exists) {
+            let correctNumber = /^[0-9]+$/.test($(`#cardNumber`).val());
+            let correctLogin = /^[A-Za-z]{3,}$/.test($(`#signUpLogin`).val());
+            let correctPassword = /^[A-Za-z]{6,}$/.test($(`#signUpPassword`).val());
+
+            if (correctNumber && $(`#formYear`).val() && $(`#formMonth`).val() && $(`#formCVV`).val().length == 3 && correctLogin && correctPassword) {
+                user1 = new UserCard($(`#cardNumber`).val(), $(`#formCVV`).val(), $(`#signUpLogin`).val(), $(`#formMonth`).val(), $(`#formYear`).val(), $(`#signUpPassword`).val(), 2);
+                user1.addUser();
+                $(`.mainPage`).css(`display`, `flex`);
+                $(`.signUpPage`).css(`display`, `none`);
+                numberUsers++;
+                $(`.notificationContainer`).css(`display`, `none`);
+                $(`.fullName`).text(user1.getCardOptions().login);
+                $(`.month`).text(user1.getCardOptions().mm);
+                $(`.year`).text(user1.getCardOptions().yy);
+                $(`.backCVV`).text(user1.getCardOptions().cvv);
+                $(`.PANConatiner`).empty();
+                $(`.PANConatiner`).append(`
+                    <span class="startPAN">####</span>
+                    <spanclass="centerPAN">########</span>
+                    <span class="endPAN">#####</span>
+                    `);
+                $(`.startPAN`).text(user1.getCardOptions().cards.substring(0, 4));
+                $(`.endPAN`).text(user1.getCardOptions().cards.substring(12, 16));
+                centerPAN = user1.getCardOptions().cards.substring(4, 12);
+                $(`.amountMoneyTransfer`).text(user1.getCardOptions().balance.toFixed(2) + `₴`);
+                $(`#balanceHomePage`).text(user1.getCardOptions().balance.toFixed(2) + `₴`);
+                user1.operationsDisplay(user1.getCardOptions().historyLogs);
+            }
+        }
+    } else {
+        displayNotification(`You can create no more than 2 accounts!`);
     }
 });
 
-let centerPAN;
-
 $(`#signInBtn`).click(() => {
-    let login = $(`#signInLogin`).val();
-    let password = $(`#signInPassword`).val();
     let userFound = false;
 
     for (let user of usersLS) {
-        if (login === user.login && password === user.password) {
+        if ($(`#signInLogin`).val() === user.login && $(`#signInPassword`).val() === user.password) {
             userFound = true;
+            user1 = new UserCard(user.cards, user.cvv, user.login, user.mm, user.yy, user.password, user.id, user.balance);
             $(`.mainPage`).css(`display`, `flex`);
             $(`.signInPage`).css(`display`, `none`);
             $(`.notificationContainer`).css(`display`, `none`);
-            $(`.fullName`).text(user.login);
-            $(`.month`).text(user.mm);
-            $(`.year`).text(user.yy);
-            $(`.backCVV`).text(user.cvv);
-            $(`.startPAN`).text(user.cards.substring(0, 4));
-            $(`.endPAN`).text(user.cards.substring(12, 16));
-            centerPAN = user.cards.substring(4, 12);
+            $(`.fullName`).text(user1.getCardOptions().login);
+            $(`.month`).text(user1.getCardOptions().mm);
+            $(`.year`).text(user1.getCardOptions().yy);
+            $(`.backCVV`).text(user1.getCardOptions().cvv);
+            $(`.startPAN`).text(user1.getCardOptions().cards.substring(0, 4));
+            $(`.endPAN`).text(user1.getCardOptions().cards.substring(12, 16));
+            centerPAN = user1.getCardOptions().cards.substring(4, 12);
+            $(`.amountMoneyTransfer`).text(user1.getCardOptions().balance.toFixed(2) + `₴`);
+            $(`#balanceHomePage`).text(user1.getCardOptions().balance.toFixed(2) + `₴`);
+            user1.operationsDisplay(user.historyLogs);
             break;
         }
     }
 
     if (!userFound) {
-        $(`.popupNotification`).css(`display`, `flex`);
-        $(`#notification`).text(`Login or password is incorrect!`);
-        setTimeout(() => {
-            $(`.popupNotification`).css(`display`, `none`);
-        }, 5000);
+        displayNotification(`Login or password is incorrect!`);
     }
 });
+
 
 $(`.homePageBtn`).addClass(`selectedPage`);
 $(`.homePageBtn`).click(() => {
@@ -254,26 +342,53 @@ $(`.transfersPageBtn`).click(() => {
     $(`.creditTransfersPage`).css(`display`, `flex`);
 });
 
-let user2;
 $(`#searchBtn`).click(() => {
-    for (let user of usersLS) {
-        if (user.cards == $(`#inputSearchCard`).val()) {
-            user2 = new UserCard(user.cards, user.cvv, user.login, user.mm, user.yy, user.password);
+    if ($(`#inputSearchCard`).val().length >= 16) {
+        if ($(`#inputSearchCard`).val() != user1.getCardOptions().cards) {
+            let userFound = false;
+
+            for (let user of usersLS) {
+                if (user.cards == $(`#inputSearchCard`).val()) {
+                    user2 = new UserCard(user.cards, user.cvv, user.login, user.mm, user.yy, user.password, user.id, user.balance);
+                    $(`.creditTransfersContainer`).css(`display`, `none`);
+                    $(`.moneyTransferContainer`).css(`display`, `flex`);
+                    $(`#nameInfo`).text(user2.getCardOptions().login);
+                    $(`#cardInfo`).text(user2.getCardOptions().cards);
+                    userFound = true;
+                    break;
+                }
+            }
+
+            if (!userFound) {
+                displayNotification('There is no such user!');
+            }
+        } else {
+            displayNotification('You can\'t send money to yourself!');
         }
+    } else {
+        displayNotification('Too few characters!');
     }
 });
 
 
 $('#Send').click(function () {
-    $(`.moneyTransferContainer`).css(`display`, `none`);
-    $(`.successfulOperationContainer`).css(`display`, `flex`);
-    if (!$('svg').hasClass("animate")) {
-        $('svg').addClass("animate");
+    if (user1.getCardOptions().balance > parseInt($(`.transferAmount`).val()) && user1.getCardOptions().trancactionLimit > parseInt($(`.transferAmount`).val())) {
+        user1.transferCredits(parseInt($(`.transferAmount`).val()), user2);
+        $(`.amountMoneyTransfer`).text(user1.getCardOptions().balance.toFixed(2) + `₴`);
+        $(`#balanceHomePage`).text(user1.getCardOptions().balance.toFixed(2) + `₴`);
+        $(`.moneyTransferContainer`).css(`display`, `none`);
+        $(`.successfulOperationContainer`).css(`display`, `flex`);
+        if (!$('svg').hasClass("animate")) {
+            $('svg').addClass("animate");
 
-        setTimeout(function () {
-            $('svg').removeClass("animate");
-            $(`.successfulOperationContainer`).css(`display`, `none`);
-            $(`.creditTransfersContainer`).css(`display`, `flex`);
-        }, 1700);
+            setTimeout(function () {
+                $('svg').removeClass("animate");
+                $(`.successfulOperationContainer`).css(`display`, `none`);
+                $(`.creditTransfersContainer`).css(`display`, `flex`);
+            }, 1700);
+        }
+    } else {
+        console.log(user1.getCardOptions().balance)
+        displayNotification('Exceeded limit!');
     }
 });
