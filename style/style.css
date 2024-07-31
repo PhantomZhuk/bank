@@ -912,4 +912,165 @@
 }
 .wrap .mainPage .creditTransfersPage .menuConteiner .selectedPage {
   color: #588157;
+}
+.wrap .mainPage .settingsPage {
+  width: 100%;
+  min-height: 100vh;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  background-color: #588157;
+}
+.wrap .mainPage .settingsPage .settingsPageContainer {
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px;
+}
+.wrap .mainPage .settingsPage .settingsPageContainer .settingsContainer {
+  width: 100%;
+  height: 90vh;
+  background-color: #333333;
+  border-radius: 20px;
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  padding: 10px;
+}
+.wrap .mainPage .settingsPage .settingsPageContainer .settingsContainer .settingBox {
+  width: 100%;
+  height: 100px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+  color: #fff;
+  padding: 20px;
+}
+.wrap .mainPage .settingsPage .settingsPageContainer .settingsContainer .settingBox .currentLimitContainer {
+  color: #ccc;
+}
+.wrap .mainPage .settingsPage .settingsPageContainer .settingsContainer .settingBox .currentLimitContainer #currentLimitOnce {
+  margin-left: 5px;
+}
+.wrap .mainPage .settingsPage .settingsPageContainer .settingsContainer .settingBox .currentLimitContainer #currentLimitDay {
+  margin-left: 5px;
+}
+.wrap .mainPage .settingsPage .settingsPageContainer .settingsContainer .settingBox .changeLomitContainerOnce {
+  height: 100%;
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+}
+.wrap .mainPage .settingsPage .settingsPageContainer .settingsContainer .settingBox .changeLomitContainerOnce .inputLimit {
+  background-color: #588157;
+  outline: none;
+  border-radius: 10px;
+  width: 300px;
+  height: 40px;
+  border: none;
+  padding-left: 10px;
+  color: #fff;
+  margin-right: 10px;
+}
+.wrap .mainPage .settingsPage .settingsPageContainer .settingsContainer .settingBox .changeLomitContainerOnce .inputLimit[type=number]::-webkit-inner-spin-button,
+.wrap .mainPage .settingsPage .settingsPageContainer .settingsContainer .settingBox .changeLomitContainerOnce .inputLimit[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.wrap .mainPage .settingsPage .settingsPageContainer .settingsContainer .settingBox .changeLomitContainerOnce .inputLimit[type=number] {
+  -moz-appearance: textfield;
+}
+.wrap .mainPage .settingsPage .settingsPageContainer .settingsContainer .settingBox .changeLomitContainerOnce .limitBtn {
+  padding: 12px 20px;
+  border-radius: 10px;
+  background-color: #588157;
+  color: #fff;
+  border: none;
+  box-shadow: 0 0 5px 1px #588157;
+  cursor: pointer;
+}
+.wrap .mainPage .settingsPage .settingsPageContainer .settingsContainer .settingBox .changeLomitContainerDay {
+  height: 100%;
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+}
+.wrap .mainPage .settingsPage .settingsPageContainer .settingsContainer .settingBox .changeLomitContainerDay .inputLimit {
+  background-color: #588157;
+  outline: none;
+  border-radius: 10px;
+  width: 300px;
+  height: 40px;
+  border: none;
+  padding-left: 10px;
+  color: #fff;
+  margin-right: 10px;
+}
+.wrap .mainPage .settingsPage .settingsPageContainer .settingsContainer .settingBox .changeLomitContainerDay .inputLimit[type=number]::-webkit-inner-spin-button,
+.wrap .mainPage .settingsPage .settingsPageContainer .settingsContainer .settingBox .changeLomitContainerDay .inputLimit[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.wrap .mainPage .settingsPage .settingsPageContainer .settingsContainer .settingBox .changeLomitContainerDay .inputLimit[type=number] {
+  -moz-appearance: textfield;
+}
+.wrap .mainPage .settingsPage .settingsPageContainer .settingsContainer .settingBox .changeLomitContainerDay .limitBtn {
+  padding: 12px 20px;
+  border-radius: 10px;
+  background-color: #588157;
+  color: #fff;
+  border: none;
+  box-shadow: 0 0 5px 1px #588157;
+  cursor: pointer;
+}
+.wrap .mainPage .settingsPage .settingsPageContainer .settingsContainer .settingBox .btnContainerOnce .changeLimitBtn {
+  padding: 12px 20px;
+  border-radius: 10px;
+  background-color: #588157;
+  color: #fff;
+  border: none;
+  box-shadow: 0 0 5px 1px #588157;
+  cursor: pointer;
+}
+.wrap .mainPage .settingsPage .settingsPageContainer .settingsContainer .settingBox .btnContainerDay .changeLimitBtn {
+  padding: 12px 20px;
+  border-radius: 10px;
+  background-color: #588157;
+  color: #fff;
+  border: none;
+  box-shadow: 0 0 5px 1px #588157;
+  cursor: pointer;
+}
+.wrap .mainPage .settingsPage .settingsPageContainer .settingsContainer::-webkit-scrollbar {
+  display: none;
+}
+.wrap .mainPage .settingsPage .menuConteiner {
+  width: 100%;
+  height: 10vh;
+  background-color: #262626;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.wrap .mainPage .settingsPage .menuConteiner a {
+  width: 200px;
+  height: 10vh;
+  text-decoration: none;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+.wrap .mainPage .settingsPage .menuConteiner a i {
+  font-size: 24px;
+}
+.wrap .mainPage .settingsPage .menuConteiner .selectedPage {
+  color: #588157;
 }/*# sourceMappingURL=style.css.map */

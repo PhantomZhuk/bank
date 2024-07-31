@@ -64,6 +64,44 @@ $(`.formCard`).click(() => {
     }
 });
 
+$('.homePageBtn').addClass('selectedPage');
+$('.homePageBtn').click(() => {
+    $('.homePageBtn').addClass('selectedPage');
+    $('.transfersPageBtn').removeClass('selectedPage');
+    $('.settingsPageBtn').removeClass('selectedPage');
+    $('.creditTransfersPage').css('display', 'none');
+    $('.settingsPage').css('display', 'none');
+    $('.homePage').css('display', 'flex');
+});
+
+$('.transfersPageBtn').click(() => {
+    $('.homePageBtn').removeClass('selectedPage');
+    $('.transfersPageBtn').addClass('selectedPage');
+    $('.settingsPageBtn').removeClass('selectedPage');
+    $('.homePage').css('display', 'none');
+    $('.settingsPage').css('display', 'none');
+    $('.creditTransfersPage').css('display', 'flex');
+});
+
+$('.settingsPageBtn').click(() => {
+    $('.homePageBtn').removeClass('selectedPage');
+    $('.transfersPageBtn').removeClass('selectedPage');
+    $('.settingsPageBtn').addClass('selectedPage');
+    $('.homePage').css('display', 'none');
+    $('.creditTransfersPage').css('display', 'none');
+    $('.settingsPage').css('display', 'flex');
+});
+
+$(`#openChangeLimiOnce`).click(()=>{
+    $(`.changeLomitContainerOnce`).css(`display`, `flex`);
+    $(`.btnContainerOnce`).css(`display`, `none`);
+});
+
+$(`#openChangeLimiteDay`).click(()=>{
+    $(`.changeLomitContainerDay`).css(`display`, `flex`);
+    $(`.btnContainerDay`).css(`display`, `none`);
+});
+
 function displayNotification(text) {
     $(`.popupNotification`).css(`display`, `flex`);
     $(`#notification`).text(text);
@@ -74,7 +112,6 @@ function displayNotification(text) {
 
 let usersLS = JSON.parse(localStorage.getItem('usersLS')) || [];
 
-// Функція для генерації нового унікального ID
 function generateNewId() {
     if (usersLS.length === 0) {
         return 1;
@@ -261,6 +298,7 @@ $('#createCard').click(() => {
             $('.amountMoneyTransfer').text(user1.getCardOptions().balance.toFixed(2) + '₴');
             $('#balanceHomePage').text(user1.getCardOptions().balance.toFixed(2) + '₴');
             user1.operationsDisplay(user1.getCardOptions().historyLogs);
+            $(`#currentLimitOnce`).text(user1.getCardOptions().transactionLimit);
         }
     }
 });
@@ -285,6 +323,7 @@ $('#signInBtn').click(() => {
             $('.amountMoneyTransfer').text(user1.getCardOptions().balance.toFixed(2) + '₴');
             $('#balanceHomePage').text(user1.getCardOptions().balance.toFixed(2) + '₴');
             user1.operationsDisplay(user1.getCardOptions().historyLogs);
+            $(`#currentLimitOnce`).text(user1.getCardOptions().transactionLimit);
             break;
         }
     }
@@ -292,22 +331,6 @@ $('#signInBtn').click(() => {
     if (!userFound) {
         displayNotification('Login or password is incorrect!');
     }
-});
-
-
-$('.homePageBtn').addClass('selectedPage');
-$('.homePageBtn').click(() => {
-    $('.homePageBtn').addClass('selectedPage');
-    $('.transfersPageBtn').removeClass('selectedPage');
-    $('.creditTransfersPage').css('display', 'none');
-    $('.homePage').css('display', 'flex');
-});
-
-$('.transfersPageBtn').click(() => {
-    $('.homePageBtn').removeClass('selectedPage');
-    $('.transfersPageBtn').addClass('selectedPage');
-    $('.homePage').css('display', 'none');
-    $('.creditTransfersPage').css('display', 'flex');
 });
 
 $('#searchBtn').click(() => {
@@ -358,4 +381,10 @@ $('#Send').click(function () {
     } else {
         displayNotification('Exceeded limit!');
     }
+});
+
+
+$(`#changeLimiOneOnce`).click(()=>{
+    user1.setTransactionLimit(parseInt($(`#inputLimitOnce`).val()));
+    $(`#currentLimitOnce`).text(user1.getCardOptions().transactionLimit);
 });
